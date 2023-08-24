@@ -1,5 +1,5 @@
 import { useEffect, useState, Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useSessionStorage } from 'usehooks-ts'
 import {
   Modal,
@@ -8,6 +8,11 @@ import {
   TextField,
   Button,
 } from '@mui/material';
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from '../../redux/reducers/user.redux'
 
 const style = {
   position: 'absolute',
@@ -24,14 +29,18 @@ const style = {
 };
 
 const ChatStarter = () => {
+  const dispatch = useDispatch()
   const [userSession, setUserSession] = useSessionStorage('user-sesh', {})
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [name, setName] = useState('')
 
   useEffect(() => {
     console.log('session', userSession);
+    dispatch(loginStart);
     if (!userSession.name) {
       setIsModalOpen(true);
+    } else {
+      dispatch(loginSuccess(userSession));
     }
   }, [])
 
@@ -42,6 +51,7 @@ const ChatStarter = () => {
   const handleOnClick = () => {
     setIsModalOpen(false);
     setUserSession({ name, avatar: 'aang' })
+    dispatch(loginSuccess({ name, avatar: 'aang' }));
   }
 
   return (
