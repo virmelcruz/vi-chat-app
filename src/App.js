@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useSelector } from 'react-redux';
 import './App.css';
+import { Button } from '@mui/material';
 
 function App() {
   const user = useSelector((state) => state.user.user)
@@ -11,6 +12,7 @@ function App() {
         <p>
           {user.name}
         </p>
+        <Button variant="contained">Hello world</Button>
         <a
           className="App-link"
           href="https://reactjs.org"
