@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import './App.css';
 import { Button, TextField } from '@mui/material';
 import { useLocalStorage } from 'usehooks-ts';
+import { ChatBox } from './components';
 
 const App = () => {
   const user = useSelector((state) => state.user.user)
@@ -27,12 +28,7 @@ const App = () => {
         <p>
           {user.name}
         </p>
-        {messages.list.map(({ content, type }) => (
-          <div>
-            {content}
-            {type}
-          </div>
-        ))}
+        <ChatBox />
         <TextField
           id="filled-basic"
           label="Filled"
