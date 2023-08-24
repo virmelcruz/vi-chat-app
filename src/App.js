@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import logo from './logo.svg';
 import { useSelector } from 'react-redux';
 import './App.css';
-import { Button, TextField } from '@mui/material';
+import { Button, TextField, Box } from '@mui/material';
 import { useLocalStorage } from 'usehooks-ts';
 import { ChatBox } from './components';
 
@@ -24,30 +23,22 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           {user.name}
         </p>
-        <ChatBox />
+      </header>
+      <ChatBox />
+      <Box sx={{ width: '100%', flexGrow: 1, display: 'flex', flexDirection: 'row' }}>
         <TextField
-          id="filled-basic"
-          label="Filled"
-          variant="filled"
+          id="outlined-basic" label="Outlined" variant="outlined"
+          fullWidth
           value={message}
           onChange={(event) => {
             setMessage(event.target.value);
           }}
         />
         <Button variant="contained" onClick={handleOnClick} >Submit</Button>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </Box>
     </div>
   );
 }

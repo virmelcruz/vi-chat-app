@@ -85,12 +85,12 @@ const ChatBox = () => {
 
   return (
     <Paper 
-      sx={{ width: '100%', maxHeight: 200, overflow: 'auto', borderRadius: 0 }}
+      sx={{ width: '100%', maxHeight: 570, overflow: 'auto', borderRadius: 0 }}
       onScroll={handleScrollOnTop}
     >
       <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
         {list.map(({ user, content }, index) => (
-          <Fragment>
+          <Fragment key={`${user.name}-${content}-${index}`}>
             <ListItem key={`${user.name}-${content}-${index}`} alignItems="flex-start" >
               <ListItemAvatar>
                 <Avatar alt={user.name} src={user.avatar} />
