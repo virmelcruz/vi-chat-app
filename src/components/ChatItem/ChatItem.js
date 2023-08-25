@@ -1,8 +1,6 @@
 
-import { Fragment, useRef, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import {
-  Paper,
-  List,
   ListItem,
   Divider,
   ListItemText,

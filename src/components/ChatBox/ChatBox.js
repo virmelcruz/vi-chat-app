@@ -3,7 +3,7 @@ import {
   Paper,
   List,
 } from '@mui/material';
-import { useLocalStorage, useTimeout } from 'usehooks-ts';
+import { useLocalStorage } from 'usehooks-ts';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useSelector, useDispatch } from 'react-redux';
 import ChatItem from '../ChatItem'
@@ -12,8 +12,6 @@ import {
   pushMessage,
   loadMore,
 } from '../../redux/reducers/chat.redux'
-
-
 
 const ChatBox = () => {
   const dispatch = useDispatch()

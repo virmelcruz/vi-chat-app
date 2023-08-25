@@ -8,7 +8,7 @@ import {
 const ChatHeader = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user)
-  const [userSession, setUserSession] = useSessionStorage('user-sesh', {})
+  const [, setUserSession] = useSessionStorage('user-sesh', {})
 
   const handleLogout = () => {
     const emptyUser = { name: '', avatar: '' };
