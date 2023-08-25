@@ -47,7 +47,7 @@ const ChatStarter = () => {
     if (reason && reason == "backdropClick") {
       return;
     }
-    
+
     setIsModalOpen(false)
   }
 
@@ -60,6 +60,12 @@ const ChatStarter = () => {
 
   const handleOnChange = (event) => {
     setName(event.target.value);
+  }
+
+  const handleOnKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleOnClick();
+    }
   }
 
   return (
@@ -80,6 +86,7 @@ const ChatStarter = () => {
             fullWidth
             value={name}
             onChange={handleOnChange}
+            onKeyPress={handleOnKeyPress}
           />
           <Button variant="contained" onClick={handleOnClick} >Submit</Button>
         </Box>

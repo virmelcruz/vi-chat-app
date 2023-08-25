@@ -21,6 +21,12 @@ const ChatAction = () => {
     }
   }
 
+  const handleOnKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleOnClick();
+    }
+  }
+
   const handleOnChange = (event) => {
     setInputMessage(event.target.value);
   }
@@ -39,8 +45,15 @@ const ChatAction = () => {
         fullWidth
         value={inputMessage}
         onChange={handleOnChange}
+        onKeyPress={handleOnKeyPress}
       />
-      <Button variant="contained" onClick={handleOnClick} disabled={!user.name} >Submit</Button>
+      <Button
+        variant="contained"
+        onClick={handleOnClick}
+        disabled={!user.name}
+      >
+        Submit
+      </Button>
     </Box>
   )
 }

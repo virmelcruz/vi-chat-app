@@ -46,9 +46,6 @@ const ChatBox = () => {
     )
   };
 
-  useEffect(() => {
-  }, [messagesList])
-
   return (
     <Paper 
       sx={{ width: '100%', maxHeight: 570, borderRadius: 0 }}
@@ -64,7 +61,6 @@ const ChatBox = () => {
           }
           inverse={true}
           style={{ display: 'flex', flexDirection: 'column-reverse' }} //To put endMessage and loader to the top.
-          
         >
           {messagesList.map(({ user, content }, index) => (
             <ChatItem user={user} content={content} key={`${user.name}-${user.content}-${index}`}/>
