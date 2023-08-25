@@ -15,9 +15,6 @@ import { useSelector } from 'react-redux';
 const ChatItem = ({ user, content, index }) => {
   const userSession = useSelector((state) => state.user.user)
   const isOwned = user.name === userSession.name
-  console.log('isOwned', isOwned)
-  console.log('user', user)
-  console.log('userSession', userSession)
 
   return (
     <Fragment key={`${user.name}-${content}-${index}`}>
