@@ -35,7 +35,7 @@ const ChatAction = () => {
       bottom: 0,
     }}>
       <TextField
-        id="outlined-basic" label="Outlined" variant="outlined"
+        id="outlined-basic" label="Message" variant="outlined"
         fullWidth
         value={inputMessage}
         onChange={handleOnChange}

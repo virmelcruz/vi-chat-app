@@ -1,5 +1,5 @@
-import { useEffect, useState, Fragment } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useSessionStorage } from 'usehooks-ts'
 import {
   Modal,
@@ -11,7 +11,6 @@ import {
 import {
   loginStart,
   loginSuccess,
-  loginFailure,
 } from '../../redux/reducers/user.redux'
 
 const style = {
@@ -42,7 +41,7 @@ const ChatStarter = () => {
     } else {
       dispatch(loginSuccess(userSession));
     }
-  }, [])
+  }, [userSession])
 
   const handleClose = () => {
     setIsModalOpen(false)
@@ -52,6 +51,11 @@ const ChatStarter = () => {
     setIsModalOpen(false);
     setUserSession({ name, avatar: 'aang' })
     dispatch(loginSuccess({ name, avatar: 'aang' }));
+    setName('');
+  }
+
+  const handleOnChange = (event) => {
+    setName(event.target.value);
   }
 
   return (
@@ -70,9 +74,7 @@ const ChatStarter = () => {
             id="outlined-basic" label="What is your name?" variant="outlined"
             fullWidth
             value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
+            onChange={handleOnChange}
           />
           <Button variant="contained" onClick={handleOnClick} >Submit</Button>
         </Box>

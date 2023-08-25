@@ -13,23 +13,29 @@ const chatSlice = createSlice({
     error: null,
   }),
   reducers: {
-    chatStart: (state) => {
-      state.isLoading = true;
+    initialLoad: (state, action) => {
+      console.log('initial payload', action.payload);
+      state.messages = action.payload
     },
-    chatSuccess: (state, action) => {
-      state.messages.push(action.payload);
+    pushMessage: (state, action) => {
+      state.messages = [
+        action.payload,
+        ...state.messages,
+      ]
     },
-    chatFailure: (state, action) => {
-      state.error = action.payload;
-      state.isLoading = false;
+    loadMore: (state, action) => {
+      const reversedList = action.payload;
+      if (reversedList) {
+        state.messages = state.messages.concat(reversedList.slice(state.messages.length, state.messages.length + 25))
+      }
     },
   }
 });
 
 export const {
-  chatStart,
-  chatSuccess,
-  chatFailure,
+  initialLoad,
+  pushMessage,
+  loadMore,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -5,40 +5,49 @@ import {
 } from '@mui/material';
 import { useLocalStorage, useTimeout } from 'usehooks-ts';
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useSelector, useDispatch } from 'react-redux';
 import ChatItem from '../ChatItem'
+import {
+  initialLoad,
+  pushMessage,
+  loadMore,
+} from '../../redux/reducers/chat.redux'
+
 
 
 const ChatBox = () => {
+  const dispatch = useDispatch()
+  const { messages: messagesList } = useSelector((state) => state.chat)
   const [messages] = useLocalStorage('messages', { list: [] });
-  const reversedList = messages.list.slice().reverse();
-  const [messagesList, setMessagesList] = useState(reversedList.slice(0, 25))
   const [hasMore, setHasMore] = useState(true);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     setIsInitialLoad(false)
+    const reversedList = messages.list.slice().reverse();
+    dispatch(initialLoad(reversedList.slice(0, 25)))
   }, []);
 
   useEffect(() => {
     if (messages.list.length && !isInitialLoad) {
-      setMessagesList([
-        messages.list[messages.list.length - 1],
-        ...messagesList,
-      ])
+      dispatch(pushMessage(messages.list[messages.list.length - 1]))
     }
   }, [messages.list.length])
 
   const fetchMoreData = () => {
-    console.log('fetches more data')
-
     if (messagesList.length >= messages.list.length) {
       setHasMore(false);
-      console.log('no more')
       return;
     }
 
-    setMessagesList(messagesList.concat(reversedList.slice(messagesList.length, messagesList.length + 25)))
+    const reversedList = messages.list.slice().reverse();
+    dispatch(
+      loadMore(reversedList)
+    )
   };
+
+  useEffect(() => {
+  }, [messagesList])
 
   return (
     <Paper 
