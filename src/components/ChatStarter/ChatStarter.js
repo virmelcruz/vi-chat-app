@@ -43,7 +43,11 @@ const ChatStarter = () => {
     }
   }, [userSession])
 
-  const handleClose = () => {
+  const handleClose = (event, reason) => {
+    if (reason && reason == "backdropClick") {
+      return;
+    }
+    
     setIsModalOpen(false)
   }
 
@@ -64,6 +68,7 @@ const ChatStarter = () => {
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      disableBackdropClick
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
